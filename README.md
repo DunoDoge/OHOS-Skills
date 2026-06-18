@@ -68,14 +68,6 @@ OHOS-Skills/
     └── references/                       # 11 篇官方 NDK 开发文档 + INDEX.md
 ```
 
-## 文档来源
-
-`arkts-helper/references/` 取自华为开发者官网「学习 ArkTS 语言」和「ArkTS（方舟编程语言）」系列文档（<https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/> 下 `introduction-to-arkts`、`arkts-coding-style-guide`、`arkts-migration-background`、`typescript-to-arkts-migration-guide`、`arkts-more-cases`、`arkts-high-performance-programming`、`arkts-utils-overview`、`xml-generation-parsing-conversion`、`buffer`、`arkts-json`、`containers`、`async-concurrency-overview`、`multithread-concurrency`、`interthread-communication`、`arkts-cross-language-interaction`），为 2026-06-18 抓取的离线快照。
-
-`arkts-build/references/` 取自华为开发者官网「命令行工具」系列文档（<https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/> 下 `ide-commandline-get`、`ide-command-line-codelinter`、`ide-command-line-hstack`、`ide-hvigor-commandline`、`ide-ohpm-cli`、`ide-command-line-building-app`、`debugging-commands`、`ide-commandline-emulator`），为 2026-06-17 抓取的离线快照。
-
-`arkts-ndk-dev/references/` 取自华为开发者官网「NDK 开发」系列文档（<https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/> 下 `ndk-development-overview`、`create-with-ndk`、`build-with-ndk`、`coding`、`rawfile-guidelines`、`native-bundle-guidelines`、`build-toolchain`、`debugging-profiling`、`hardware-compatibility`），为 2026-06-18 抓取的离线快照。
-
 ## License
 
 - 仓库整体（skill 元数据、`arkts-debug/`、`README.md`、`arkts-helper/SKILL.md`、`arkts-ndk-dev/SKILL.md`、`arkts-build/SKILL.md` 等自行编写的内容）以 [MIT 许可](./LICENSE) 发布。

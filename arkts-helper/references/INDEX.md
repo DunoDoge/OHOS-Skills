@@ -1,52 +1,61 @@
-# ArkTS 参考文档索引
+<!-- 必先阅读 -->
+<!-- ArkTS 语言规范以官网为准：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/introduction-to-arkts -->
 
-本目录文档来源于 OpenHarmony 官方文档仓库 `zh-cn/application-dev/quick-start/` 下的「学习ArkTS语言」一节，与华为开发者文档站「学习ArkTS语言」目录同源（开源版本，内容一致）。
+# INDEX - arkts-helper 参考文档索引
 
-- 上游仓库：<https://gitee.com/openharmony/docs>
-- 上游路径：`zh-cn/application-dev/quick-start/`
-- 分支：`master`
-- 抓取时点：见各文件的 git 历史；本地副本仅作离线参考使用
+> **必先阅读**：任何 arkts-helper 任务开始前，**必须先读本文件**，再根据任务类型按映射表加载对应文档。
+>
+> **ArkTS 语言规范以官网为准**：ArkTS 语法与适配规则会随 HarmonyOS 版本更新，本文档为 2026-06-18 抓取的离线快照，遇到不确定的语法请查阅上游官网文档。
 
-> 文档中出现的相对链接（如 `../arkts-utils/...`）指向上游仓库的兄弟目录，本地副本未跟随抓取。如需展开请直接到上游仓库查阅。
+## 文档角色一览
 
-## 文件清单（按学习顺序）
+| 文件 | 角色 |
+| --- | --- |
+| `01-arkts-language-introduction.md` | ArkTS 语言介绍：基本知识、声明、类型、运算符、语句、函数、类、接口、泛型、枚举、模块、空安全 |
+| `02-arkts-coding-style.md` | ArkTS 编程规范：命名规范、代码格式、注释规范、编程实践 |
+| `03-ts-to-arkts-migration-background.md` | TS→ArkTS 适配背景：程序稳定性、程序性能、兼容性、方舟运行时 |
+| `04-ts-to-arkts-migration-rules.md` | **TS→ArkTS 适配规则（核心）**：强制静态类型、禁止运行时变更对象布局、限制运算符语义、不支持 structural typing、约束说明 |
+| `05-ts-to-arkts-migration-cases.md` | TS→ArkTS 适配案例：arkts-no-* 规则的具体适配实例 |
+| `06-arkts-high-performance.md` | **ArkTS 高性能编程（核心）**：声明优化、函数优化、数组优化、容器优化、并发优化 |
+| `07-arkts-stdlib-overview.md` | ArkTS 基础类库概述：XML/Buffer/容器/URL/Decimal/JSON |
+| `08-arkts-xml-buffer-json.md` | XML 生成解析转换 + Buffer/FastBuffer + JSON 扩展库 |
+| `09-arkts-container-library.md` | ArkTS 容器类库：线性容器（7种）+ 非线性容器（7种）+ 选择指南 |
+| `10-arkts-concurrency-async.md` | 异步并发：Promise/async-await/组合方法/最佳实践 |
+| `11-arkts-concurrency-multithread.md` | **多线程并发（核心）**：TaskPool/Worker/线程间通信/Sendable |
+| `12-arkts-cross-language-overview.md` | 跨语言交互概览：Node-API 概念与开发流程入口（详细开发转 arkts-ndk-dev） |
 
-| 序号 | 文件 | 章节标题 | 用途 |
-| ---- | ---- | -------- | ---- |
-| 01 | [01-arkts-get-started.md](./01-arkts-get-started.md) | 初识ArkTS语言 | 了解 ArkTS 与 TS 的差异、整体定位 |
-| 02 | [02-introduction-to-arkts.md](./02-introduction-to-arkts.md) | ArkTS语言介绍 | 全量语法手册：基本类型、函数、类、接口、泛型、空安全、模块、关键字、注解、ArkUI 支持 |
-| 03 | [03-arkts-coding-style-guide.md](./03-arkts-coding-style-guide.md) | ArkTS编程规范 | 命名、格式、编程实践等通用编码风格规范 |
-| 04 | [04-arkts-migration-background.md](./04-arkts-migration-background.md) | ArkTS语法适配背景 | 解释为什么 ArkTS 在 TS 基础上做强约束 |
-| 05 | [05-typescript-to-arkts-migration-guide.md](./05-typescript-to-arkts-migration-guide.md) | 从TypeScript到ArkTS的适配规则 | **核心强约束清单**，按 `arkts-xxx` 规则 ID 列出全部限制 |
-| 06 | [06-arkts-more-cases.md](./06-arkts-more-cases.md) | 适配指导案例 | 上述规则配套的反例/正例代码示范 |
-| 07 | [07-arkts-high-performance-programming.md](./07-arkts-high-performance-programming.md) | ArkTS高性能编程实践 | 声明、函数、数组、异常等性能敏感写法 |
-| 08 | [08-getting-started-with-arkts-for-java-programmers.md](./08-getting-started-with-arkts-for-java-programmers.md) | 从Java到ArkTS的迁移指导 | 面向 Java 开发者的对照速查 |
-| 09 | [09-getting-started-with-arkts-for-swift-programmers.md](./09-getting-started-with-arkts-for-swift-programmers.md) | 从Swift到ArkTS的迁移指导 | 面向 Swift 开发者的对照速查 |
+## 按场景的查阅路径
 
-## 按场景检索
+| 场景 | 必读文件（在 `references/` 下） |
+| --- | --- |
+| 学习 ArkTS 语法 | `01-arkts-language-introduction.md`, `02-arkts-coding-style.md` |
+| TS 代码迁移到 ArkTS | `03-ts-to-arkts-migration-background.md` → `04-ts-to-arkts-migration-rules.md` → `05-ts-to-arkts-migration-cases.md` |
+| 优化 ArkTS 代码性能 | `06-arkts-high-performance.md` |
+| 使用基础类库 | `07-arkts-stdlib-overview.md`, `08-arkts-xml-buffer-json.md`, `09-arkts-container-library.md` |
+| 并发编程 | `10-arkts-concurrency-async.md`, `11-arkts-concurrency-multithread.md` |
+| 与 C++ 交互 | `12-arkts-cross-language-overview.md`（详细开发转 `arkts-ndk-dev` skill） |
+| 编译报错修复 | 转 `arkts-debug` skill |
 
-| 你想知道… | 优先看 |
-| -------- | ----- |
-| ArkTS 是什么、和 TS 有何区别 | 01 → 04 |
-| 某个语法（类、接口、泛型、空安全 …）怎么写 | 02 |
-| 命名、缩进、注释、模块组织风格 | 03 |
-| **TS 代码迁移到 ArkTS 时哪些写法被禁止** | 05（按 `arkts-no-xxx` 规则名查） |
-| 某条规则该怎么改写 | 06（与 05 中规则 ID 对应） |
-| 哪些写法影响性能、应避免 | 07 |
-| 从 Java/Swift 学 ArkTS | 08 / 09 |
+## TS→ArkTS 关键差异速记
 
-## 关键强约束速记（出自 03/05/07）
+| 差异项 | TS | ArkTS |
+| --- | --- | --- |
+| 类型系统 | 可选静态 | **强制静态**，禁止 any/unknown |
+| 对象布局 | 运行时可变 | **禁止运行时变更** |
+| 运算符 | 一元 + 可转数字 | **一元 + 仅用于数字** |
+| 类型兼容 | Structural typing | **不支持**，基于名义类型 |
+| 变量声明 | var/let/const | **禁止 var**，仅 let/const |
+| 类型断言 | as 随意使用 | **限制 as**，优先显式声明 |
+| 对象字面量 | 匿名类型 | **必须对应 class/interface** |
+| 索引签名 | 支持 | **不支持**，用 Record/Map |
+| 函数重载 | 支持 | **不支持**，用联合类型/可选参数 |
 
-> 下列条目仅为提示，**任何具体编码决策都必须回到对应文档原文中确认**。
+## 高性能编程红线速记
 
-- 强制静态类型：禁用 `any` / `unknown`（`arkts-no-any-unknown`）
-- 禁止运行时改变对象布局：禁止动态增删属性（`arkts-no-props-by-index` 等）
-- 禁止结构化类型（structural typing）：类型必须按声明匹配
-- 限制运算符语义：`+` 不能用于非数字类型等
-- 不允许无类型对象字面量、不允许把对象字面量当类型用
-- 不支持 `with`、`eval`、运行时 `typeof` 取类型字符串作类型判断
-- 禁止可调用签名 / 索引签名 / 构造签名等动态特性
-- 异常类型必须为 `Error` 子类，禁止 `catch (e: SomeType)` 自定义类型注解
-- 模块默认严格，禁止 CommonJS 风格混用
-
-完整清单见 `05-typescript-to-arkts-migration-guide.md`。
+- **const**：不变的变量必须用 const
+- **数值**：避免整型浮点混用
+- **循环**：常量提取，减少属性访问
+- **函数**：避免可选参数、避免参数重新赋值
+- **数组**：避免稀疏数组
+- **容器**：使用 ArkTS 容器类（ArrayList/HashMap 等）替代 Array
+- **并发**：耗时任务用 TaskPool/Worker，避免阻塞主线程

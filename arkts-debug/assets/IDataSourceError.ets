@@ -46,7 +46,7 @@ struct UserList {
     List() {
       LazyForEach(
         this.source,
-        (u: User): void => {
+        (u: User) => {
           ListItem() { Text(u.name) }
         },
         (u: User): string => `${u.id}`

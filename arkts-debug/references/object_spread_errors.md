@@ -29,10 +29,15 @@ const b: Point = { x: 3, y: 4 };
 const merged: Point = { x: b.x, y: b.y }; // explicit copy
 ```
 
-If you genuinely need a partial-merge helper, write it as a typed function:
+If you genuinely need a partial-merge helper, write it as a typed function with an explicit interface (ArkTS does not support `Partial<T>` mapped types):
 
 ```ts
-function mergePoint(a: Point, b: Partial<Point>): Point {
+interface PatchPoint {
+  x?: number;
+  y?: number;
+}
+
+function mergePoint(a: Point, b: PatchPoint): Point {
   return { x: b.x ?? a.x, y: b.y ?? a.y };
 }
 ```

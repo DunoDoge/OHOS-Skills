@@ -35,6 +35,23 @@ if (ctx === null) { return; }
 ctx.eventHub.emit('ready'); // ctx is now Context
 ```
 
+When constructing nullable return values, use constructors instead of type assertions:
+
+```ts
+class User {
+  id: number = 0;
+  name: string = '';
+  constructor(id: number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}
+
+function findUser(id: number): User | null {
+  return id === 1 ? new User(1, 'Alice') : null;
+}
+```
+
 ## Notes
 
 - Avoid the non-null assertion `!.` unless you can prove the value is non-null at that point. Strict ArkTS configurations can disallow it.

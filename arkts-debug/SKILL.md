@@ -1,18 +1,18 @@
 ---
 name: arkts-debug
-description: Use when fixing ArkTS / .ets compilation errors and type mismatches in HarmonyOS / OpenHarmony app development. Triggers include errors mentioning ContentType, AppStorage.get, @StorageLink, getLastWindow, AvoidArea, TitleButtonRect, IDataSource, ESObject, LazyForEach, duplicate @Entry, "Object literal must correspond to some explicitly declared class or interface", "Possibly null", "Standalone function uses this", or any arkts-no-* rule reported by hvigor / ArkCompiler. Loads a curated catalog of common HarmonyOS build errors and their canonical fixes.
+description: Use when fixing ArkTS / .ets compilation errors and type mismatches in HarmonyOS / OpenHarmony app development. Triggers include errors mentioning ContentType, AppStorage.get, @StorageLink, getLastWindow, AvoidArea, TitleButtonRect, IDataSource, ESObject, LazyForEach, duplicate @Entry, "Object literal must correspond to some explicitly declared class or interface", "Possibly null", "Standalone function uses this", "Indexed access is not supported", arkts-no-props-by-index, "Declaration merging is not supported", arkts-no-decl-merging, "Cannot find module", "Maximum call stack", "inferred type cannot be named", or any arkts-no-* rule reported by hvigor / ArkCompiler. Loads a curated catalog of common HarmonyOS build errors and their canonical fixes.
 ---
 
 # Harmony Error Fixes
 
-This skill provides solutions for common ArkTS compilation errors and type mismatches encountered during HarmonyOS / OpenHarmony development. Each entry has a focused reference document under `reference/` and a minimal `.ets` example under `assets/`.
+This skill provides solutions for common ArkTS compilation errors and type mismatches encountered during HarmonyOS / OpenHarmony development. Each entry has a focused reference document under `references/` and a minimal `.ets` example under `assets/`.
 
 ## When to use this skill
 
 Activate this skill whenever **any** of the following holds:
 
 - The user pastes an ArkTS / `.ets` compile error from DevEco Studio, hvigor, or ArkCompiler.
-- The error contains rule codes from the `arkts-no-*` family, or mentions any of: `ContentType`, `AppStorage.get`, `@StorageLink`, `getLastWindow`, `AvoidArea`, `TitleButtonRect`, `IDataSource`, `ESObject`, `LazyForEach`, duplicate `@Entry`, "Possibly 'null'", "Object literal must correspond to some explicitly declared class or interface", "Standalone function ... uses `this`".
+- The error contains rule codes from the `arkts-no-*` family, or mentions any of: `ContentType`, `AppStorage.get`, `@StorageLink`, `getLastWindow`, `AvoidArea`, `TitleButtonRect`, `IDataSource`, `ESObject`, `LazyForEach`, duplicate `@Entry`, "Possibly 'null'", "Object literal must correspond to some explicitly declared class or interface", "Standalone function ... uses `this`", "Indexed access is not supported", `arkts-no-props-by-index`, "Declaration merging is not supported", `arkts-no-decl-merging`, "Cannot find module", "Maximum call stack", "inferred type cannot be named".
 - The user asks how to fix a HarmonyOS build failure or strict ArkTS type error.
 - You are reviewing `.ets` code and want to pre-empt the most common compile errors.
 
@@ -28,7 +28,7 @@ Read the user's error message and map it to one row in the **Error Categories** 
 
 For each category there are two files:
 
-- `reference/<topic>.md` - root cause, canonical fix, edge-case notes.
+- `references/<topic>.md` - root cause, canonical fix, edge-case notes.
 - `assets/<Topic>.ets` - minimal **before / after** code that compiles cleanly.
 
 Read **both** for the matched category before editing the user's code. Do not skim only the Quick Reference table.
@@ -43,7 +43,7 @@ If the user's code has multiple errors, fix them one category at a time and re-c
 
 When you reply, cite the specific reference file you used, e.g.:
 
-> Fix per `arkts-debug/reference/possibly_null_errors.md`.
+> Fix per `arkts-debug/references/possibly_null_errors.md`.
 
 ## Error Categories
 
@@ -71,6 +71,12 @@ When you reply, cite the specific reference file you used, e.g.:
 | Duplicate Entry Errors | Multiple `@Entry` decorators in the same file |
 | Possibly Null Errors | Object possibly null when accessing properties |
 | Window Rect/Size Type Errors | `window.Rect` / `window.Size` shape mismatch |
+| Indexed Access Errors | `arkts-no-props-by-index` — bracket notation property access |
+| Declaration Merging Errors | `arkts-no-decl-merging` — duplicate declarations or namespace merging |
+| Inferred Type Naming Errors | Exported symbol's inferred type cannot be named without internal reference |
+| Array Type Inference Errors | Missing element type in array declarations (e.g., `[][]`) |
+| Module Resolution Errors | Cannot find module or no exported member |
+| Circular Import Errors | Circular module dependencies causing stack overflow |
 
 ## Quick Reference
 
@@ -98,93 +104,123 @@ When you reply, cite the specific reference file you used, e.g.:
 | Duplicate Entry error | Remove extra `@Entry`; use `@Component` for child components |
 | Possibly Null error | Add `!== null` check or use optional chaining |
 | Window Rect/Size type error | Use the correct `window.Rect` / `window.Size` shape |
+| Indexed access error | Use dot notation or `Map` instead of bracket notation |
+| Declaration merging error | Consolidate into a single declaration or use `extends` |
+| Inferred type naming error | Add explicit return type annotation to exported symbols |
+| Array type inference error | Specify explicit element type (e.g., `string[][]` instead of `[][]`) |
+| Module resolution error | Check `oh-package.json5`, import path, and case sensitivity |
+| Circular import error | Extract shared types into a separate module |
 
 ## Detailed Error Solutions
 
 ### Notification API Type Errors
-- [Notification Type Error](./reference/notification_errors.md)
+- [Notification Type Error](./references/notification_errors.md)
 - [Code Example](./assets/NotificationError.ets)
 
 ### Window API Type Errors
-- [Window Type Inference Error](./reference/window_type_errors.md)
+- [Window Type Inference Error](./references/window_type_errors.md)
 - [Code Example](./assets/WindowTypeError.ets)
 
 ### AppStorage Type Errors
-- [AppStorage Type Error](./reference/appstorage_errors.md)
+- [AppStorage Type Error](./references/appstorage_errors.md)
 - [Code Example](./assets/AppStorageError.ets)
 
 ### Object Spread Type Errors
-- [Object Spread Type Error](./reference/object_spread_errors.md)
+- [Object Spread Type Error](./references/object_spread_errors.md)
 - [Code Example](./assets/ObjectSpreadError.ets)
 
 ### @StorageLink Default Value Errors
-- [@StorageLink Default Value Error](./reference/storage_link_default_errors.md)
+- [@StorageLink Default Value Error](./references/storage_link_default_errors.md)
 - [Code Example](./assets/StorageLinkDefaultError.ets)
 
 ### Object Literal Interface Errors
-- [Object Literal Interface Error](./reference/object_literal_interface_errors.md)
+- [Object Literal Interface Error](./references/object_literal_interface_errors.md)
 - [Code Example](./assets/ObjectLiteralInterfaceError.ets)
 
 ### Object Literal Type Errors
-- [Object Literal Type Error](./reference/object_literal_type_errors.md)
+- [Object Literal Type Error](./references/object_literal_type_errors.md)
 - [Code Example](./assets/ObjectLiteralTypeError.ets)
 
 ### Function Return Type Errors
-- [Function Return Type Error](./reference/function_return_type_errors.md)
+- [Function Return Type Error](./references/function_return_type_errors.md)
 - [Code Example](./assets/FunctionReturnTypeError.ets)
 
 ### Arrow Function Conversion Errors
-- [Arrow Function Conversion Error](./reference/arrow_function_conversion_errors.md)
+- [Arrow Function Conversion Error](./references/arrow_function_conversion_errors.md)
 - [Code Example](./assets/ArrowFunctionConversionError.ets)
 
 ### Color Property Errors
-- [Color Property Error](./reference/color_property_errors.md)
+- [Color Property Error](./references/color_property_errors.md)
 - [Code Example](./assets/ColorPropertyError.ets)
 
 ### Interface Method Signature Errors
-- [Interface Method Signature Error](./reference/interface_method_signature_errors.md)
+- [Interface Method Signature Error](./references/interface_method_signature_errors.md)
 - [Code Example](./assets/InterfaceMethodSignatureError.ets)
 
 ### AvoidArea Type Errors
-- [AvoidArea Type Error](./reference/avoid_area_type_errors.md)
+- [AvoidArea Type Error](./references/avoid_area_type_errors.md)
 - [Code Example](./assets/AvoidAreaTypeError.ets)
 
 ### Standalone Function `this` Errors
-- [Standalone Function `this` Error](./reference/standalone_function_errors.md)
+- [Standalone Function `this` Error](./references/standalone_function_errors.md)
 - [Code Example](./assets/StandaloneFunctionError.ets)
 
 ### TitleButtonRect Type Errors
-- [TitleButtonRect Type Error](./reference/title_button_rect_type_errors.md)
+- [TitleButtonRect Type Error](./references/title_button_rect_type_errors.md)
 - [Code Example](./assets/TitleButtonRectTypeError.ets)
 
 ### Catch Clause Type Errors
-- [Catch Clause Type Error](./reference/catch_clause_type_errors.md)
+- [Catch Clause Type Error](./references/catch_clause_type_errors.md)
 - [Code Example](./assets/CatchClauseTypeError.ets)
 
 ### ESObject Type Errors
-- [ESObject Type Error](./reference/esobject_type_errors.md)
+- [ESObject Type Error](./references/esobject_type_errors.md)
 - [Code Example](./assets/ESObjectTypeError.ets)
 
 ### Resource Conversion Errors
-- [Resource Conversion Error](./reference/resource_conversion_errors.md)
+- [Resource Conversion Error](./references/resource_conversion_errors.md)
 - [Code Example](./assets/ResourceConversionError.ets)
 
 ### Unused Variable Warnings
-- [Unused Variable Warning](./reference/unused_variable_warnings.md)
+- [Unused Variable Warning](./references/unused_variable_warnings.md)
 - [Code Example](./assets/UnusedVariableWarning.ets)
 
 ### IDataSource Type Errors
-- [IDataSource Type Error](./reference/idata_source_errors.md)
+- [IDataSource Type Error](./references/idata_source_errors.md)
 - [Code Example](./assets/IDataSourceError.ets)
 
 ### Duplicate Entry Errors
-- [Duplicate Entry Error](./reference/duplicate_entry_errors.md)
+- [Duplicate Entry Error](./references/duplicate_entry_errors.md)
 - [Code Example](./assets/DuplicateEntryError.ets)
 
 ### Possibly Null Errors
-- [Possibly Null Error](./reference/possibly_null_errors.md)
+- [Possibly Null Error](./references/possibly_null_errors.md)
 - [Code Example](./assets/PossiblyNullError.ets)
 
 ### Window Rect/Size Type Errors
-- [Window Rect/Size Type Error](./reference/window_rect_size_errors.md)
+- [Window Rect/Size Type Error](./references/window_rect_size_errors.md)
 - [Code Example](./assets/WindowRectSizeError.ets)
+
+### Indexed Access Errors
+- [Indexed Access Error](./references/indexed_access_errors.md)
+- [Code Example](./assets/IndexedAccessError.ets)
+
+### Declaration Merging Errors
+- [Declaration Merging Error](./references/decl_merging_errors.md)
+- [Code Example](./assets/DeclMergingError.ets)
+
+### Inferred Type Naming Errors
+- [Inferred Type Naming Error](./references/inferred_type_naming_errors.md)
+- [Code Example](./assets/InferredTypeNamingError.ets)
+
+### Array Type Inference Errors
+- [Array Type Inference Error](./references/array_type_inference_errors.md)
+- [Code Example](./assets/ArrayTypeInferenceError.ets)
+
+### Module Resolution Errors
+- [Module Resolution Error](./references/module_resolution_errors.md)
+- [Code Example](./assets/ModuleResolutionError.ets)
+
+### Circular Import Errors
+- [Circular Import Error](./references/circular_import_errors.md)
+- [Code Example](./assets/CircularImportError.ets)

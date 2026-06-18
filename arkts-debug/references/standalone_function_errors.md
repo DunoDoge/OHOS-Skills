@@ -34,9 +34,14 @@ function refresh(context: common.UIAbilityContext): void {
 If the function is conceptually a method, move it onto a class or component:
 
 ```ts
-@Component
-struct Page {
-  private refresh = (): void => { /* this.* is OK here */ };
+class Refresher {
+  private context: common.UIAbilityContext;
+  constructor(context: common.UIAbilityContext) {
+    this.context = context;
+  }
+  refresh(): void {
+    this.context.eventHub.emit('refresh');
+  }
 }
 ```
 

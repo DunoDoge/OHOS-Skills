@@ -4,6 +4,11 @@ interface Point {
   y: number;
 }
 
+interface PatchPoint {
+  x?: number;
+  y?: number;
+}
+
 // BAD: spread of object with inferred type
 // const a = { x: 1, y: 2 };
 // const b = { x: 3, y: 4 };
@@ -14,8 +19,8 @@ const a: Point = { x: 1, y: 2 };
 const b: Point = { x: 3, y: 4 };
 const merged: Point = { x: b.x, y: b.y };
 
-// GOOD: typed merge helper
-function mergePoint(base: Point, patch: Partial<Point>): Point {
+// GOOD: typed merge helper (use explicit interface instead of Partial<>)
+function mergePoint(base: Point, patch: PatchPoint): Point {
   return { x: patch.x ?? base.x, y: patch.y ?? base.y };
 }
 

@@ -13,7 +13,10 @@ export function refresh(context: common.UIAbilityContext): void {
 
 // GOOD: methods on a class can use `this`
 class Refresher {
-  constructor(private context: common.UIAbilityContext) {}
+  private context: common.UIAbilityContext;
+  constructor(context: common.UIAbilityContext) {
+    this.context = context;
+  }
   refresh(): void {
     this.context.eventHub.emit('refresh');
   }

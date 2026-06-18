@@ -2,10 +2,14 @@
 class User {
   id: number = 0;
   name: string = '';
+  constructor(id: number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
 }
 
 function findUser(id: number): User | null {
-  return id === 1 ? { id: 1, name: 'Alice' } as User : null;
+  return id === 1 ? new User(1, 'Alice') : null;
 }
 
 // BAD: object possibly null

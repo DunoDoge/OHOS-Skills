@@ -41,6 +41,7 @@ HarmonyOS 的命令行工具链（Command Line Tools，含 `codelinter`、`hstac
 | ArkTS 语法/迁移/编码规范 | `arkts-helper` | 本 skill 只讲构建命令，不讲 ArkTS 语法 |
 | ArkTS 编译报错（`arkts-no-*` 规则等） | `arkts-debug` | 构建失败若是代码报错，用 `arkts-debug` 修复代码，再回到本 skill 重新构建 |
 | NDK / C++ / Node-API 互操作 | `arkts-ndk-dev` | 本 skill 只覆盖「hvigorw 怎么触发 native 构建 / syncNative / build-profile.json5 的 abiFilters」命令行层；CMake 工具链变量、.so 链接、musl/libc++ 等 C++ 层问题归 `arkts-ndk-dev` |
+| 离线文档未覆盖的工具 / 选项 / 流程 | `harmony-fetch` | 本 skill 的 8 篇离线文档若不足以回答问题（如新增 CLI 参数、新版 ohpm 行为变化），用 `harmony-fetch` 从华为开发者门户拉取最新文档 |
 
 ## 工作流程（严格遵守）
 

@@ -16,6 +16,19 @@ Fetch HarmonyOS developer documentation from Huawei's official portal via public
 - User asks "check Huawei docs" or references developer.huawei.com links
 - Need to verify current API signatures, deprecated features, or new capabilities
 
+## 本地文档覆盖范围
+
+在调用线上 API 前，先判断以下本地 skill 是否已覆盖所需内容。**只有当本地文档不足时才使用本 skill 拉取线上文档。**
+
+| 本地 skill | 离线文档 | 覆盖主题 |
+| --- | --- | --- |
+| `arkts-helper` | 12 篇 | ArkTS 语言语法、类型系统、编码规范、TS→ArkTS 迁移规则与案例、高性能编程、标准库（XML/Buffer/JSON/容器）、并发（Promise/TaskPool/Worker/Sendable） |
+| `arkts-debug` | 28 篇 + 28 个 `.ets` 示例 | 28 类常见 ArkTS 编译报错的根因与修复（`arkts-no-*` 规则、`ContentType`、`@StorageLink`、`LazyForEach`、`Possibly null` 等） |
+| `arkts-build` | 8 篇 | 命令行构建/测试/签名/部署全流程：`hvigorw`、`codelinter`、`hstack`、`ohpm`、`hdc`、CI 流水线、`hap-sign-tool` |
+| `arkts-ndk-dev` | 11 篇 | NDK / Node-API / C++ 互操作：CMake 工具链、`napi_wrap`、`napi_threadsafe_function`、Rawfile、NativeBundle、ASan、LLDB、ABI/Neon |
+
+**判断流程**：用户问题 → 先查上表中对应 skill 的离线文档 → 若文档不足以回答 → 使用本 skill 从华为开发者门户拉取。
+
 ## Quick Start
 
 **Two-step workflow**: Search → Fetch.

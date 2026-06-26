@@ -40,6 +40,7 @@ Agent 凭通用 Node.js N-API 经验写出的代码，在鸿蒙上**极易崩溃
 | ArkTS 语法/迁移/编码规范 | `arkts-helper` | 本 skill 只讲 Node-API/C++ 侧，不讲 ArkTS 语法 |
 | ArkTS 编译报错（`arkts-no-*` 规则等） | `arkts-debug` | NDK 开发中遇到的 ArkTS 编译报错，用 `arkts-debug` 修复代码 |
 | 命令行构建/部署/签名/流水线 | `arkts-build` | 本 skill 只覆盖「CMakeLists.txt 怎么写 / CMake 工具链变量怎么配」；`hvigorw` 构建命令本身归 `arkts-build` |
+| 离线文档未覆盖的 NDK / Native API | `harmony-fetch` | 本 skill 的 11 篇离线文档若不足以回答问题（如新增 NDK 接口、Node-API 版本变更、ASan/LLDB 新特性），用 `harmony-fetch` 从华为开发者门户拉取最新文档 |
 
 ## 工作流程（严格遵守）
 

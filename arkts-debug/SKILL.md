@@ -18,6 +18,17 @@ Activate this skill whenever **any** of the following holds:
 
 If the task is general ArkTS authoring / migration / style (not a concrete error to fix), prefer `arkts-helper` instead. Use both together when the user is migrating TS to ArkTS and hits compile errors.
 
+## 与已有 skill 的边界
+
+本 skill 负责**「编译报错怎么修」**，不负责**「代码怎么写」「构建命令怎么调」「NDK 代码怎么写」**。当修复任务中涉及以下问题时，应交叉引用对应 skill：
+
+| 问题类型 | 交叉引用 skill | 边界说明 |
+| --- | --- | --- |
+| ArkTS 语法/迁移/编码规范（非报错场景） | `arkts-helper` | 本 skill 讲「报错后如何修复」，`arkts-helper` 讲「如何写出合规代码以避免报错」 |
+| 代码修复后需要重新构建验证 | `arkts-build` | 用本 skill 修复代码后，用 `arkts-build` 的 `hvigorw` 命令重新构建并确认错误消除 |
+| NDK / C++ 侧编译报错 | `arkts-ndk-dev` | 本 skill 只覆盖 ArkTS 侧编译报错；若报错来自 C++ / CMake / Node-API 层（如 `.so` 链接失败、符号未定义），用 `arkts-ndk-dev` 排查 |
+| 离线文档未覆盖的报错 / API 变更 | `harmony-fetch` | 本 skill 的 28 类错误目录若未覆盖当前报错（如新增 `arkts-no-*` 规则、API 废弃），用 `harmony-fetch` 从华为开发者门户拉取最新文档 |
+
 ## Workflow (follow strictly)
 
 ### 1. Identify the error category

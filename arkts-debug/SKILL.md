@@ -18,16 +18,16 @@ Activate this skill whenever **any** of the following holds:
 
 If the task is general ArkTS authoring / migration / style (not a concrete error to fix), prefer `arkts-helper` instead. Use both together when the user is migrating TS to ArkTS and hits compile errors.
 
-## 与已有 skill 的边界
+## Boundary with Other Skills
 
-本 skill 负责**「编译报错怎么修」**，不负责**「代码怎么写」「构建命令怎么调」「NDK 代码怎么写」**。当修复任务中涉及以下问题时，应交叉引用对应 skill：
+This skill covers **"how to fix compilation errors"**, not **"how to write code"**, **"how to invoke build commands"**, or **"how to write NDK code"**. When a fix task involves the following issues, cross-reference the corresponding skill:
 
-| 问题类型 | 交叉引用 skill | 边界说明 |
+| Issue Type | Cross-reference Skill | Boundary |
 | --- | --- | --- |
-| ArkTS 语法/迁移/编码规范（非报错场景） | `arkts-helper` | 本 skill 讲「报错后如何修复」，`arkts-helper` 讲「如何写出合规代码以避免报错」 |
-| 代码修复后需要重新构建验证 | `arkts-build` | 用本 skill 修复代码后，用 `arkts-build` 的 `hvigorw` 命令重新构建并确认错误消除 |
-| NDK / C++ 侧编译报错 | `arkts-ndk-dev` | 本 skill 只覆盖 ArkTS 侧编译报错；若报错来自 C++ / CMake / Node-API 层（如 `.so` 链接失败、符号未定义），用 `arkts-ndk-dev` 排查 |
-| 离线文档未覆盖的报错 / API 变更 | `harmony-fetch` | 本 skill 的 28 类错误目录若未覆盖当前报错（如新增 `arkts-no-*` 规则、API 废弃），用 `harmony-fetch` 从华为开发者门户拉取最新文档 |
+| ArkTS syntax / migration / coding style (non-error scenarios) | `arkts-helper` | This skill covers "how to fix errors"; `arkts-helper` covers "how to write compliant code to avoid errors" |
+| Need to rebuild and verify after fixing code | `arkts-build` | Use this skill to fix code, then use `arkts-build`'s `hvigorw` commands to rebuild and confirm the error is resolved |
+| NDK / C++ side compilation errors | `arkts-ndk-dev` | This skill only covers ArkTS-side compilation errors; if errors come from C++ / CMake / Node-API layers (e.g. `.so` link failures, undefined symbols), use `arkts-ndk-dev` |
+| Errors / API changes not covered by offline docs | `harmony-fetch` | If the 28 error categories in this skill do not cover the current error (e.g. new `arkts-no-*` rules, deprecated APIs), use `harmony-fetch` to fetch the latest documentation from the Huawei developer portal |
 
 ## Workflow (follow strictly)
 

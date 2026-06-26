@@ -35,7 +35,7 @@ Complete list of catalogs that can be queried with the `getCatalogTree` API.
 |-------------|-------------|
 | `harmonyos-center-guides` | Center-specific guides (10 sections) |
 
-### Atomic Services (元服务)
+### Atomic Services
 
 | catalogName | Description |
 |-------------|-------------|
@@ -86,26 +86,26 @@ This is the public-facing endpoint (no auth required). All POST requests go here
 
 The main catalog `harmonyos-guides` contains these top-level sections:
 
-1. **应用开发导读** — Application development introduction
-2. **应用开发准备** — Development preparation (quick start)
-3. **应用开发** — Application development (Kits overview)
-4. **系统** — System capabilities (security, network, basic functions)
-5. **媒体** — Media (audio, video, camera)
-6. **图形** — Graphics (AR, 2D, 3D)
-7. **应用服务** — Application services (accounts, ads, store, payments)
-8. **AI** — AI capabilities (Agent Framework, CANN, Speech, Vision)
-9. **一多开发适配与部署** — Multi-device adaptation
-10. **流转** — Device continuity/hopping
-11. **NDK开发** — Native development kit
-12. **开发环境搭建** — DevEco Studio setup
-13. **应用测试** — Application testing
-14. **使用AI智能辅助编码** — AI-assisted coding (CodeGennie)
-15. **编写调试应用** — Writing and debugging apps
-16. **构建应用** — Building applications (hvigor)
-17. **优化应用性能** — Performance optimization
-18. **发布应用** — Publishing applications
-19. **开发相关工具** — Development tools (command line, codelinter, hstack)
-20. **应用质量建议** — Quality recommendations
+1. **Application Development Introduction**
+2. **Development Preparation** (quick start)
+3. **Application Development** (Kits overview)
+4. **System** (security, network, basic functions)
+5. **Media** (audio, video, camera)
+6. **Graphics** (AR, 2D, 3D)
+7. **Application Services** (accounts, ads, store, payments)
+8. **AI** (Agent Framework, CANN, Speech, Vision)
+9. **Multi-Device Adaptation & Deployment**
+10. **Device Continuity / Hopping**
+11. **NDK Development** (native development kit)
+12. **Development Environment Setup** (DevEco Studio)
+13. **Application Testing**
+14. **AI-Assisted Coding** (CodeGennie)
+15. **Writing & Debugging Applications**
+16. **Building Applications** (hvigor)
+17. **Performance Optimization**
+18. **Publishing Applications**
+19. **Development Tools** (command line, codelinter, hstack)
+20. **Quality Recommendations**
 
 ## Catalog Tree Node Structure
 

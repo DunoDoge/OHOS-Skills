@@ -1,88 +1,88 @@
-<!-- 必先阅读 -->
-<!-- 命令版本差异以官网为准：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-commandline-get -->
+<!-- Must read first -->
+<!-- Command version differences: refer to the official documentation: https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-commandline-get -->
 
-# INDEX - arkts-build 参考文档索引
+# INDEX - arkts-build Reference Documentation
 
-> **必先阅读**：任何 arkts-build 任务开始前，**必须先读本文件**，再根据任务类型按映射表加载对应文档。
+> **Must read first**: Before any arkts-build task, **read this file first**, then load the corresponding document based on the task type mapping table below.
 >
-> **命令版本差异以官网为准**：hvigorw / codelinter / ohpm 等工具的命令与参数会随 HarmonyOS 版本更新，本文档为 2026-06-17 抓取的离线快照，遇到不确定的命令请先 `hvigorw -v` / `codelinter -v` / `ohpm -v` 确认版本，并以上游官网文档为准。
+> **Command version differences: refer to the official documentation**: Commands and parameters for tools like hvigorw / codelinter / ohpm may change with HarmonyOS version updates. This document is an offline snapshot taken on 2026-06-17; if uncertain about a command, first check the version with `hvigorw -v` / `codelinter -v` / `ohpm -v` and refer to the upstream official documentation.
 
-## 文档角色一览
+## Document Roles
 
-| 文件 | 角色 |
+| File | Role |
 | --- | --- |
-| `01-command-line-tools-overview.md` | Command Line Tools 获取、环境变量配置（Windows/macOS/Linux）、工具总览 |
-| `02-codelinter.md` | 代码检查工具 `codelinter` 命令行参数、规则配置、增量检查、QuickFix、退出码、输出格式 |
-| `03-hstack.md` | release 崩溃堆栈解析工具 `hstack` 参数、sourceMap/so/nameCache 归档、解析原理与示例 |
-| `04-hvigorw.md` | 命令行构建工具 `hvigorw` 任务、扩展参数、daemon、日志、可视化、性能开关、测试命令 |
-| `05-ohpm.md` | 三方依赖管理工具 `ohpm` 常用命令、oh-package.json5、仓库配置 |
-| `06-building-app.md` | 搭建流水线完整流程（环境配置 → ohpm install → hvigorw 构建 → 签名 → hdc 安装运行 → 示例脚本） |
-| `07-debugging-commands.md` | SDK 命令行工具索引（hdc/aa/bm/hilog/hidumper/hitrace/hiperf 等） |
-| `08-emulator.md` | 模拟器工具（Emulator）命令行使用、推包调试、Linux 版本、gRPC 远程服务 |
+| `01-command-line-tools-overview.md` | Command Line Tools acquisition, environment variable configuration (Windows/macOS/Linux), tool overview |
+| `02-codelinter.md` | Code linter `codelinter` command-line parameters, rule configuration, incremental checks, QuickFix, exit codes, output formats |
+| `03-hstack.md` | Release crash stack parsing tool `hstack` parameters, sourceMap/so/nameCache archiving, parsing principles and examples |
+| `04-hvigorw.md` | Command-line build tool `hvigorw` tasks, extension parameters, daemon, logging, visualization, performance switches, test commands |
+| `05-ohpm.md` | Third-party dependency management tool `ohpm` common commands, oh-package.json5, repository configuration |
+| `06-building-app.md` | Full CI pipeline setup (environment config → ohpm install → hvigorw build → signing → hdc install & run → example scripts) |
+| `07-debugging-commands.md` | SDK command-line tool index (hdc/aa/bm/hilog/hidumper/hitrace/hiperf, etc.) |
+| `08-emulator.md` | Emulator command-line usage, push-package debugging, Linux version, gRPC remote service |
 
-## 按任务类型的查阅路径
+## Reading Paths by Task Type
 
-| 任务类型 | 必读文件（在 `references/` 下） |
+| Task Type | Required Reading (under `references/`) |
 | --- | --- |
-| 工具获取 / 环境变量配置 | `01-command-line-tools-overview.md` |
-| 代码静态检查 / CI 门禁 | `02-codelinter.md` |
-| release 崩溃堆栈解析 | `03-hstack.md` |
-| **hvigorw 构建命令 / 构建参数** | `04-hvigorw.md` |
-| ohpm 装包 / 发包 / 依赖管理 | `05-ohpm.md` |
-| **搭建 CI 流水线 / 构建后签名安装运行** | `06-building-app.md`（+ `04-hvigorw.md`） |
-| 设备调试命令（hdc/aa/bm 等） | `07-debugging-commands.md`（+ `06-building-app.md` 的「运行应用」一节） |
-| 模拟器使用 | `08-emulator.md` |
-| 测试（onDeviceTest / Local Test） | `04-hvigorw.md` 的「测试命令」一节 |
+| Tool acquisition / environment variable configuration | `01-command-line-tools-overview.md` |
+| Code static analysis / CI gates | `02-codelinter.md` |
+| Release crash stack parsing | `03-hstack.md` |
+| **hvigorw build commands / build parameters** | `04-hvigorw.md` |
+| ohpm install / publish / dependency management | `05-ohpm.md` |
+| **CI pipeline setup / post-build signing, install & run** | `06-building-app.md` (+ `04-hvigorw.md`) |
+| Device debugging commands (hdc/aa/bm, etc.) | `07-debugging-commands.md` (+ the "Running Applications" section in `06-building-app.md`) |
+| Emulator usage | `08-emulator.md` |
+| Testing (onDeviceTest / Local Test) | The "Test Commands" section in `04-hvigorw.md` |
 
-## 关键命令速记
+## Key Commands Quick Reference
 
 ```bash
-# === hvigorw 构建 ===
-hvigorw clean --no-daemon                                          # 清理构建产物
-hvigorw assembleHap --mode module -p product=default -p buildMode=debug --no-daemon   # 构建 Hap
-hvigorw assembleApp --mode project -p product=default -p buildMode=release --no-daemon # 构建 App
-hvigorw assembleHsp --mode module -p module=library@default -p product=default --no-daemon  # 构建 Hsp
-hvigorw assembleHar --mode module -p module=library1@default -p product=default --no-daemon  # 构建 Har
+# === hvigorw Build ===
+hvigorw clean --no-daemon                                          # Clean build outputs
+hvigorw assembleHap --mode module -p product=default -p buildMode=debug --no-daemon   # Build Hap
+hvigorw assembleApp --mode project -p product=default -p buildMode=release --no-daemon # Build App
+hvigorw assembleHsp --mode module -p module=library@default -p product=default --no-daemon  # Build Hsp
+hvigorw assembleHar --mode module -p module=library1@default -p product=default --no-daemon  # Build Har
 
-# === hvigorw 测试 ===
-hvigorw onDeviceTest -p module={moduleName} -p coverage=true -p scope={suiteName}#{methodName}  # 设备测试
-hvigorw test -p module={moduleName} -p coverage=true -p scope={suiteName}#{methodName}          # 本地测试
+# === hvigorw Test ===
+hvigorw onDeviceTest -p module={moduleName} -p coverage=true -p scope={suiteName}#{methodName}  # On-device test
+hvigorw test -p module={moduleName} -p coverage=true -p scope={suiteName}#{methodName}          # Local test
 
-# === ohpm 依赖管理 ===
-ohpm install                          # 安装依赖
-ohpm install --all                    # 安装所有依赖（含模块下）
-ohpm publish pkg.har                  # 发布 har
-ohpm config set registry https://ohpm.openharmony.cn/ohpm/  # 配置仓库
-ohpm config set strict_ssl false      # 关闭严格 SSL
+# === ohpm Dependency Management ===
+ohpm install                          # Install dependencies
+ohpm install --all                    # Install all dependencies (including modules)
+ohpm publish pkg.har                  # Publish har
+ohpm config set registry https://ohpm.openharmony.cn/ohpm/  # Configure repository
+ohpm config set strict_ssl false      # Disable strict SSL
 
-# === codelinter 代码检查 ===
-codelinter                            # 默认检查
-codelinter -c code-linter.json5 -f json -o report.json --exit-on error  # CI 检查
-codelinter -i                         # 增量检查
-codelinter -c filepath --fix          # 检查并自动修复
+# === codelinter Code Analysis ===
+codelinter                            # Default check
+codelinter -c code-linter.json5 -f json -o report.json --exit-on error  # CI check
+codelinter -i                         # Incremental check
+codelinter -c filepath --fix          # Check and auto-fix
 
-# === hstack 堆栈解析 ===
+# === hstack Stack Parsing ===
 hstack -i D:\crashDir -o D:\outputDir -s D:\sourcemapDir --so D:\soDir -n D:\nameCacheDir
 
-# === hdc 安装运行 ===
-hdc file send "xxx.hap" "data/local/tmp/xxx.hap"     # 推送 HAP
-hdc shell bm install -p "data/local/tmp/xxx.hap"     # 安装 HAP
-hdc shell aa start -a EntryAbility -b com.example.myapplication -m entry  # 启动应用
+# === hdc Install & Run ===
+hdc file send "xxx.hap" "data/local/tmp/xxx.hap"     # Push HAP
+hdc shell bm install -p "data/local/tmp/xxx.hap"     # Install HAP
+hdc shell aa start -a EntryAbility -b com.example.myapplication -m entry  # Launch app
 
-# === 签名 ===
+# === Signing ===
 java -jar hap-sign-tool.jar sign-app -keyAlias "demo_key" -signAlg "SHA256withECDSA" -mode "localSign" \
   -appCertFile "/path/demo.cer" -profileFile "/path/demo.p7b" -inFile "/path/hap-unsigned.hap" \
   -keystoreFile "/path/demo.p12" -outFile "/path/hap-signed.hap" -keyPwd "123456Abc" -keystorePwd "123456Abc"
 ```
 
-## 版本相关命令速记
+## Version-Specific Commands Quick Reference
 
-以下命令有版本要求，使用前先 `hvigorw -v` 确认版本：
+The following commands have version requirements. Check with `hvigorw -v` before use:
 
-| 命令/参数 | 起始版本 |
+| Command / Parameter | Minimum Version |
 | --- | --- |
-| `buildInfo` / `-v` 任意路径执行 / `--max-semi-space-size` | hvigorw 5.18.4 |
-| `onDeviceTest` 的 `ohos-debug-asan` | hvigorw 5.19.0 |
+| `buildInfo` / `-v` run from any path / `--max-semi-space-size` | hvigorw 5.18.4 |
+| `onDeviceTest` with `ohos-debug-asan` | hvigorw 5.19.0 |
 | `--optimization-strategy` | hvigorw 5.19.2 |
 | `--analyze=ultrafine` | hvigorw 6.0.0 |
 | `-p buildVersion=` | hvigorw 6.23.3 |

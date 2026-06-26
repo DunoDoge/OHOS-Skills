@@ -16,18 +16,18 @@ Fetch HarmonyOS developer documentation from Huawei's official portal via public
 - User asks "check Huawei docs" or references developer.huawei.com links
 - Need to verify current API signatures, deprecated features, or new capabilities
 
-## 本地文档覆盖范围
+## Local Documentation Coverage
 
-在调用线上 API 前，先判断以下本地 skill 是否已覆盖所需内容。**只有当本地文档不足时才使用本 skill 拉取线上文档。**
+Before calling the online API, check whether the following local skills already cover the needed content. **Only use this skill to fetch online documentation when local docs are insufficient.**
 
-| 本地 skill | 离线文档 | 覆盖主题 |
+| Local Skill | Offline Docs | Topics Covered |
 | --- | --- | --- |
-| `arkts-helper` | 12 篇 | ArkTS 语言语法、类型系统、编码规范、TS→ArkTS 迁移规则与案例、高性能编程、标准库（XML/Buffer/JSON/容器）、并发（Promise/TaskPool/Worker/Sendable） |
-| `arkts-debug` | 28 篇 + 28 个 `.ets` 示例 | 28 类常见 ArkTS 编译报错的根因与修复（`arkts-no-*` 规则、`ContentType`、`@StorageLink`、`LazyForEach`、`Possibly null` 等） |
-| `arkts-build` | 8 篇 | 命令行构建/测试/签名/部署全流程：`hvigorw`、`codelinter`、`hstack`、`ohpm`、`hdc`、CI 流水线、`hap-sign-tool` |
-| `arkts-ndk-dev` | 11 篇 | NDK / Node-API / C++ 互操作：CMake 工具链、`napi_wrap`、`napi_threadsafe_function`、Rawfile、NativeBundle、ASan、LLDB、ABI/Neon |
+| `arkts-helper` | 12 docs | ArkTS language syntax, type system, coding style, TS→ArkTS migration rules and cases, high-performance programming, standard library (XML/Buffer/JSON/containers), concurrency (Promise/TaskPool/Worker/Sendable) |
+| `arkts-debug` | 28 docs + 28 `.ets` examples | Root causes and fixes for 28 common ArkTS compilation errors (`arkts-no-*` rules, `ContentType`, `@StorageLink`, `LazyForEach`, `Possibly null`, etc.) |
+| `arkts-build` | 8 docs | Full command-line build/test/sign/deploy workflow: `hvigorw`, `codelinter`, `hstack`, `ohpm`, `hdc`, CI pipelines, `hap-sign-tool` |
+| `arkts-ndk-dev` | 11 docs | NDK / Node-API / C++ interop: CMake toolchain, `napi_wrap`, `napi_threadsafe_function`, Rawfile, NativeBundle, ASan, LLDB, ABI/Neon |
 
-**判断流程**：用户问题 → 先查上表中对应 skill 的离线文档 → 若文档不足以回答 → 使用本 skill 从华为开发者门户拉取。
+**Decision flow**: user question → check the corresponding skill's offline docs first → if docs are insufficient → use this skill to fetch from the Huawei developer portal.
 
 ## Quick Start
 
@@ -148,7 +148,7 @@ For full catalog list and doc tree structure, see [doc-structure.md](doc-structu
 - `"document not found"` → objectId slug is wrong; try browsing the catalog tree
 - `"主仓不存在"` → the center API catalog doesn't exist; use the standard API
 - Empty response → network issue or rate limiting; retry after a short wait
-- Garbled Chinese text or `UnicodeEncodeError` → Windows terminal uses GBK encoding by default; the script includes an automatic UTF-8 fix in `main()`. If it still fails, use the import mode described in [Windows 环境注意事项](#windows-环境注意事项).
+Garbled Chinese text or `UnicodeEncodeError` → Windows terminal uses GBK encoding by default; the script includes an automatic UTF-8 fix in `main()`. If it still fails, use the import mode described in [Windows Environment Notes](#windows-environment-notes).
 
 ## Pitfalls
 
@@ -157,9 +157,9 @@ For full catalog list and doc tree structure, see [doc-structure.md](doc-structu
 - Image URLs in document content are CDN-hosted with time-limited signatures; they expire after 24 hours.
 - The `-V5` suffix on catalog names and document slugs refers to a specific version; the bare name fetches the latest version.
 
-## Windows 环境注意事项
+## Windows Environment Notes
 
-Windows 终端默认使用 GBK 编码（CP936），直接运行 `fetch_doc.py` 可能导致中文乱码，或在遇到包含特殊 Unicode 字符（如 U+200C 零宽非连接符）的文档时抛出 `UnicodeEncodeError`。脚本已在 `main()` 中内置了 `sys.stdout.reconfigure(encoding='utf-8')` 自动修复，但如果仍有问题（例如在某些终端模拟器或管道环境中），推荐使用 **Python import 模式**：
+Windows terminals default to GBK encoding (CP936). Running `fetch_doc.py` directly may produce garbled Chinese output or throw a `UnicodeEncodeError` when encountering special Unicode characters (e.g., U+200C zero-width non-joiner). The script includes an automatic fix via `sys.stdout.reconfigure(encoding='utf-8')` in `main()`, but if issues persist (e.g., in certain terminal emulators or piped environments), use the **Python import mode**:
 
 ```python
 import sys, os
@@ -176,4 +176,4 @@ with open('output.md', 'w', encoding='utf-8') as f:
     f.write(f'# {title}\n\n{md}')
 ```
 
-这种方式绕过终端编码问题，直接将内容写入 UTF-8 文件，是 Windows 上**最可靠的调用方式**。批量获取多个文档时也推荐使用此模式。
+This bypasses terminal encoding issues by writing directly to a UTF-8 file, making it the **most reliable approach on Windows**. This mode is also recommended for batch-fetching multiple documents.
